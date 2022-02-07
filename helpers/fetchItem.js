@@ -3,7 +3,7 @@ const fetchItem = async (paramItem) => {
       throw new Error('You must provide an url');
     }
   
-    const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${paramItem}`);
+    const response = await fetch(`https://api.mercadolibre.com/items/${paramItem}`);
     const info = await response.json();
     return info;
 };  

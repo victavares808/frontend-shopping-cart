@@ -4,6 +4,7 @@ const saveCartItems = require('../helpers/saveCartItems');
 localStorageSimulator('setItem');
 
 describe('4 - Teste a função saveCartItems', () => {
-  // implemente seus testes aqui
-
+  it ('teste se, ao chamar a função fetchItem com o argumento "computador", a função fetch utiliza o endpoint desejado', async () => {       
+    
+  })
 });

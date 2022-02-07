@@ -12,7 +12,11 @@ function createCustomElement(element, className, innerText) {
   return e;
 }
 
-function createProductItemElement({ sku, name, image }) {
+function createProductItemElement({
+  sku,
+  name,
+  image,
+}) {
   const section = document.createElement('section');
   const item = document.querySelector('.items');
   section.className = 'item';
@@ -27,13 +31,17 @@ function createProductItemElement({ sku, name, image }) {
 
 function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText; // info do ID
-} 
+}
 
- function cartItemClickListener(event) {
+function cartItemClickListener(event) {
   // coloque seu código aqui
 }
 
-function createCartItemElement({ sku, name, salePrice }) {
+function createCartItemElement({
+  sku,
+  name,
+  salePrice,
+}) {
   const li = document.createElement('li');
   const cartItem = document.querySelector('.cart__items');
   li.className = 'cart__item';
@@ -45,51 +53,34 @@ function createCartItemElement({ sku, name, salePrice }) {
 function apiInfo(produtos) {
   produtos.forEach((randomProduct) => {
     createProductItemElement({
-      sku: randomProduct.id, 
-      name: randomProduct.title, 
-      image: randomProduct.thumbnail, 
+      sku: randomProduct.id,
+      name: randomProduct.title,
+      image: randomProduct.thumbnail,
     });
   });
 }
 
-const goToCart = async() => {
- const value = document.querySelectorAll('.item') 
- value.forEach((element) => {
- const getId = getSkuFromProductItem(element)
- const getButton = element.querySelector('button') 
- getButton.addEventListener('click', async () => {
- const itemAPI = await fetchItem(getId);
- const info = {
-   sku: itemAPI.id,
-   name: itemAPI.title,
-   salePrice: itemAPI.price,
- }
- return createCartItemElement (info);
+const goToCart = async () => {
+  const value = document.querySelectorAll('.item');
+  value.forEach((element) => {
+    const getId = getSkuFromProductItem(element);
+    const getButton = element.querySelector('button');
+    getButton.addEventListener('click', async () => {
+      const itemAPI = await fetchItem(getId);
+      console.log(itemAPI);
+      const info = {
+        sku: itemAPI.id,
+        name: itemAPI.title,
+        salePrice: itemAPI.price,
+      };
+      return createCartItemElement(info);
+    });
   });
- });
-}
+};
 
-/* function removeProduct() {
-  let elem = document.getElementById('.cart__items');
-  elem.parentNode.removeChild(elem);
-  return false;
- } */
- 
-/* function itemInfo(item) {
-item.forEach((clickItem)=> {
-  createCartItemElement({ 
-   
-  });
-});
-} */
-
-window.onload = async () => { 
+window.onload = async () => {
   const fetchP = await fetchProducts('computador');
-  console.log(fetchP);
   apiInfo(fetchP.results);
 
-  const fetchI = await fetchItem();
-  console.log(fetchI);
-  goToCart(fetchI.results);  
-  };
+  goToCart();
 };
