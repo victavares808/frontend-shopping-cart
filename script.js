@@ -52,7 +52,7 @@ function apiInfo(produtos) {
   });
 }
 
-function goToCart = async () => {
+const goToCart = async() => {
  const value = document.querySelectorAll('.item') 
  value.forEach((element) => {
  const getId = getSkuFromProductItem(element)
@@ -65,9 +65,15 @@ function goToCart = async () => {
    salePrice: itemAPI.price,
  }
  return createCartItemElement (info);
- });
+  });
  });
 }
+
+/* function removeProduct() {
+  let elem = document.getElementById('.cart__items');
+  elem.parentNode.removeChild(elem);
+  return false;
+ } */
  
 /* function itemInfo(item) {
 item.forEach((clickItem)=> {
