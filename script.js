@@ -89,9 +89,18 @@ function handleItems() {
   cartItem.addEventListener('click', cartItemClickListener);
 }
 
+function wipeItAll() {
+  const cartItem = document.querySelector(ItemCart);
+  const chooseListItem = document.querySelectorAll('li');
+  chooseListItem.forEach((element) => element.remove());
+  saveCartItems(cartItem.innerHTML);
+}
+
 window.onload = async () => {
   const fetchP = await fetchProducts('computador');
+  const chooseClearButton = document.querySelector('.empty-cart');
   apiInfo(fetchP.results);
   goToCart();
   handleItems();
+  chooseClearButton.addEventListener('click', wipeItAll);
 };
