@@ -34,7 +34,9 @@ function getSkuFromProductItem(item) {
 }
 
 function cartItemClickListener(event) {
-  return event.target.remove();
+  const cartItem = document.querySelector('.cart__items');
+  event.target.remove();
+  saveCartItems(cartItem.innerHTML);
 }
 
 function createCartItemElement({
@@ -79,10 +81,14 @@ const goToCart = async () => {
   });
 };
 
+function handleItems() {
+  const cartItem = document.querySelector('.cart__items');
+  cartItem.innerHTML = getSavedCartItems();
+}
+
 window.onload = async () => {
   const fetchP = await fetchProducts('computador');
-  const recover = document.querySelector('.cart__items');
   apiInfo(fetchP.results);
   goToCart();
-  recover.innerHTML = getSavedCartItems('cartItem');
+  handleItems();
 };
